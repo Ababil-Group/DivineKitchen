@@ -9,6 +9,8 @@ import {
   FaWineBottle,
   FaCoffee,
   FaBirthdayCake,
+  FaPhoneAlt,
+  FaEnvelopeOpen,
 } from "react-icons/fa";
 import cafeImage from "../../assets/images/restorant/cafe.jpg?url";
 import breakfast from "../../assets/images/restorant/morning.webp?url";
@@ -110,7 +112,7 @@ const AboutCafeBeatch = () => {
             </motion.p>
 
             <motion.div
-              className="space-y-6 text-gray-700 mb-10"
+              className="space-y-3 text-gray-700 mb-10"
               variants={container}
               initial="hidden"
               animate="show"
@@ -136,7 +138,21 @@ const AboutCafeBeatch = () => {
                 variants={item}
               >
                 <FaMapMarkerAlt className="mr-2 text-amber-600" />
-                <span>Rue de l'Église, 84220 Gordes, France</span>
+                <span>Ul. Hrvoja Macanovića 44A, 10000, Zagreb, Croatia</span>
+              </motion.div>
+              <motion.div
+                className="flex items-center text-amber-800"
+                variants={item}
+              >
+                <FaPhoneAlt className="mr-2 text-amber-600" />
+                <span>+385915508242</span>
+              </motion.div>
+              <motion.div
+                className="flex items-center text-amber-800"
+                variants={item}
+              >
+                <FaEnvelopeOpen className="mr-2 text-amber-600" />
+                <span>manager@divinekitchen.eu</span>
               </motion.div>
             </motion.div>
 

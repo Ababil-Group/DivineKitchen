@@ -6,6 +6,8 @@ import {
   FaRegClock,
   FaMapMarkerAlt,
   FaCocktail,
+  FaPhoneAlt,
+  FaEnvelopeOpen,
 } from "react-icons/fa";
 import { GiSandsOfTime, GiWaveSurfer, GiSunset } from "react-icons/gi";
 import { MdOutlineRestaurant, MdEventSeat } from "react-icons/md";
@@ -121,7 +123,21 @@ const LockOutBeach = () => {
               variants={fadeIn}
             >
               <FaMapMarkerAlt className="mr-2 text-amber-500" />
-              <span>Rue de l'Église, 84220 Gordes, France</span>
+              <span>Ul. Hrvoja Macanovića 44A, 10000, Zagreb, Croatia</span>
+            </motion.div>
+            <motion.div
+              className="flex items-center text-blue-900"
+              variants={fadeIn}
+            >
+              <FaPhoneAlt className="mr-2 text-amber-500" />
+              <span>+385915508242</span>
+            </motion.div>
+            <motion.div
+              className="flex items-center text-blue-900"
+              variants={fadeIn}
+            >
+              <FaEnvelopeOpen className="mr-2 text-amber-500" />
+              <span>manager@divinekitchen.eu</span>
             </motion.div>
           </motion.div>
 
@@ -387,10 +403,17 @@ const LockOutBeach = () => {
                   <FaMapMarkerAlt className="text-4xl mx-auto mb-4 text-amber-300" />
                   <h3 className="text-xl font-bold mb-2">Visit Us</h3>
                   <p className="mb-6">
-                    Rue de l'Église, <br /> 84220 Gordes, France
+                    Ul. Hrvoja Macanovića 44A, 10000, Zagreb, Croatia
                   </p>
+                  <p className="mb-6">+385915508242</p>
                   <div className="flex justify-center space-x-4">
-                    <button className="bg-white text-blue-900 py-2 px-6 rounded-full text-sm font-medium">
+                    <button
+                      onClick={() => {
+                        const section = document.querySelector("#footer");
+                        section?.scrollIntoView({ behavior: "smooth" });
+                      }}
+                      className="bg-white text-blue-900 py-2 px-6 rounded-full text-sm font-medium"
+                    >
                       Get Directions
                     </button>
                   </div>

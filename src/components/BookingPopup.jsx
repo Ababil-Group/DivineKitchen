@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   FiCalendar,
   FiClock,
@@ -7,6 +7,7 @@ import {
   FiUsers,
   FiMail,
   FiX,
+  FiCheckCircle,
 } from "react-icons/fi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -21,23 +22,89 @@ const BookingPopup = ({ onClose }) => {
     email: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
-    console.log("Booking submitted:", { date: selectedDate, ...formData });
-    onClose();
+    const form = new FormData();
+    form.append("guests", formData.guests);
+    form.append("time", formData.time);
+    form.append("tablePreference", formData.tablePreference);
+    form.append("name", formData.name);
+    form.append("email", formData.email);
+    form.append("date", selectedDate.toLocaleDateString());
+
+    try {
+      const response = await fetch(
+        "https://formsubmit.co/ajax/manager@divinekitchen.eu",
+        {
+          method: "POST",
+          body: form,
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success === "true") {
+        setShowSuccess(true);
+        setFormData({
+          guests: 2,
+          time: "",
+          tablePreference: "",
+          name: "",
+          email: "",
+        });
+      }
+    } catch (error) {
+      console.error("Booking submission error:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 bg-opacity-50 p-4">
+      {/* Success Modal */}
+      {showSuccess && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6 relative">
+            <button
+              onClick={() => setShowSuccess(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+            >
+              <FiX size={24} />
+            </button>
+            <div className="text-center py-6">
+              <FiCheckCircle className="text-green-500 text-5xl mx-auto mb-4" />
+              <h3 className="text-2xl font-serif font-normal text-gray-800 mb-2">
+                Booking Submitted Successfully!
+              </h3>
+              <p className="text-gray-600">
+                Thank you! We'll get back to you to confirm your reservation.
+              </p>
+              <button
+                onClick={() => setShowSuccess(false)}
+                className="mt-6 px-6 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-md transition duration-300"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -190,11 +257,12 @@ const BookingPopup = ({ onClose }) => {
               <div className="pt-2">
                 <motion.button
                   type="submit"
+                  disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full bg-gradient-to-r from-[#ff2709] to-[#ffaa13] text-white py-3 px-6 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300"
                 >
-                  Confirm Booking
+                  {isSubmitting ? "Submitting..." : "Confirm Booking"}
                 </motion.button>
               </div>
             </form>

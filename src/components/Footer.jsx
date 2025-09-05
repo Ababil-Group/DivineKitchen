@@ -9,13 +9,14 @@ import {
   FaLinkedin,
   FaTiktok,
   FaYoutube,
+  FaPhoneAlt,
+  FaEnvelope,
 } from "react-icons/fa";
 
 const Footer = () => {
   return (
     <footer id="footer" className="bg-[#1a1a1a] pt-12 pb-8 text-white">
       <div className="max-w-screen-xl mx-auto px-4">
-        {/* Top Section */}
         <div className="flex flex-col md:flex-row items-center justify-between border-b border-gray-600 pb-8 mb-8">
           <a href="/">
             <img
@@ -70,11 +71,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Main Content */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-8">
-          {/* Left Column - Map & Info */}
           <div className="col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Map */}
             <div className="h-64 md:h-80 rounded-lg overflow-hidden shadow-lg border-2 border-red-500">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d9742.268666784183!2d4.520172962552425!3d52.37826795119799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x47c5ec1449efa40d%3A0xdeece6e308e70b52!2sDoctor%20Johannus%20G.%20Mezgerstraat%2C%20Zandvoort%2C%20Netherlands!3m2!1d52.3782553!2d4.5304727!5e0!3m2!1sen!2sbd!4v1749796675108!5m2!1sen!2sbd"
@@ -88,7 +86,6 @@ const Footer = () => {
               ></iframe>
             </div>
 
-            {/* Contact Info */}
             <div className="space-y-6">
               <div className="flex items-start gap-3">
                 <FaMapMarkerAlt className="text-red-500 mt-1 text-lg" />
@@ -97,8 +94,27 @@ const Footer = () => {
                     Address
                   </h3>
                   <p className="text-gray-300">
-                    Rue de l'Église, 84220 Gordes, France
+                    Ul. Hrvoja Macanovića 44A, 10000, Zagreb, Croatia
                   </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <FaPhoneAlt className="text-red-500 mt-1 text-lg" />
+                <div>
+                  <h3 className="text-lg font-semibold text-white mb-2">
+                    Phone
+                  </h3>
+                  <p className="text-gray-300">+385915508242</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <FaEnvelope className="text-red-500 mt-1 text-lg" />
+                <div>
+                  <h3 className="text-lg font-semibold text-white mb-2">
+                    Email Our Team
+                  </h3>
+                  <p className="text-gray-300">manager@divinekitchen.eu</p>
                 </div>
               </div>
 
@@ -118,7 +134,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Right Column - Contact Form */}
           <div id="contact-us" className="col-span-5">
             <h3 className="text-lg font-semibold text-white mb-4">
               Send us a message
@@ -214,7 +229,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
         <div className="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400 text-sm">
           © {new Date().getFullYear()} Divine Kitchen. All rights reserved.
         </div>

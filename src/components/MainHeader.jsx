@@ -76,7 +76,7 @@ const MainHeader = () => {
       <HashLink
         smooth
         to={item.path}
-        className="px-2 py-2 text-gray-800 hover:text-primary text-sm font-semibold font-lato tracking-wider leading-relaxed transition-colors duration-300"
+        className="px-2 py-2 text-gray-800 hover:text-primary text-[15px] font-semibold font-lato tracking-wider leading-relaxed transition-colors duration-300"
         onClick={() => {
           setMobileMenuOpen(false);
         }}
@@ -86,7 +86,7 @@ const MainHeader = () => {
     ) : (
       <Link
         to={item.path}
-        className="px-2 py-2 text-gray-800 hover:text-primary text-sm font-semibold font-lato transition-colors duration-300"
+        className="px-2 py-2 text-gray-800 hover:text-primary text-[15px] font-semibold font-lato transition-colors duration-300"
         onClick={() => {
           setMobileMenuOpen(false);
         }}
@@ -100,7 +100,7 @@ const MainHeader = () => {
       <HashLink
         smooth
         to={subItem.path}
-        className="block py-2 pl-6 text-gray-700 hover:text-primary text-sm font-semibold font-lato hover:bg-gray-100 rounded transition-colors duration-300"
+        className="block py-2 pl-6 text-gray-700 hover:text-primary text-[15px] font-semibold font-lato hover:bg-gray-100 rounded transition-colors duration-300"
         onClick={() => {
           setMobileMenuOpen(false);
           setActiveSubmenu(null);
@@ -111,7 +111,7 @@ const MainHeader = () => {
     ) : (
       <Link
         to={subItem.path}
-        className="block py-2 pl-6 text-gray-700 hover:text-primary hover:bg-gray-100 rounded transition-colors duration-300"
+        className="block py-2 pl-6 text-gray-700 hover:text-primary text-[15px] hover:bg-gray-100 rounded transition-colors duration-300"
         onClick={() => {
           setMobileMenuOpen(false);
           setActiveSubmenu(null);
