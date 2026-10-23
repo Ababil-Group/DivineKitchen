@@ -75,7 +75,8 @@ const Footer = () => {
           <div className="col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="h-64 md:h-80 rounded-lg overflow-hidden shadow-lg border-2 border-red-500">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d9742.268666784183!2d4.520172962552425!3d52.37826795119799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x47c5ec1449efa40d%3A0xdeece6e308e70b52!2sDoctor%20Johannus%20G.%20Mezgerstraat%2C%20Zandvoort%2C%20Netherlands!3m2!1d52.3782553!2d4.5304727!5e0!3m2!1sen!2sbd!4v1749796675108!5m2!1sen!2sbd"
+                src="https://maps.google.com/maps?q=Ul.%20Hrvoja%20Macanovi%C4%87a%2044A%2C%2010000%20Zagreb%2C%20Croatia&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                title="Divine Kitchen location - Ul. Hrvoja Macanovića 44A, Zagreb"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -105,7 +106,7 @@ const Footer = () => {
                   <h3 className="text-lg font-semibold text-white mb-2">
                     Phone
                   </h3>
-                  <p className="text-gray-300">+385915508242</p>
+                  <p className="text-gray-300">+385 99 751 7865</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">

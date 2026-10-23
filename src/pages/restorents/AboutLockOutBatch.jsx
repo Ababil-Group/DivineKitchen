@@ -130,7 +130,7 @@ const LockOutBeach = () => {
               variants={fadeIn}
             >
               <FaPhoneAlt className="mr-2 text-amber-500" />
-              <span>+385915508242</span>
+              <span>+385 99 751 7865</span>
             </motion.div>
             <motion.div
               className="flex items-center text-blue-900"
@@ -405,7 +405,7 @@ const LockOutBeach = () => {
                   <p className="mb-6">
                     Ul. Hrvoja Macanovića 44A, 10000, Zagreb, Croatia
                   </p>
-                  <p className="mb-6">+385915508242</p>
+                  <p className="mb-6">+385 99 751 7865</p>
                   <div className="flex justify-center space-x-4">
                     <button
                       onClick={() => {

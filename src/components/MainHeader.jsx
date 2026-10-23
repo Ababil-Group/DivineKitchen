@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import logo from "/logo1.png";
-import { FiChevronDown, FiX, FiMenu } from "react-icons/fi";
+import { FiChevronDown, FiX, FiMenu, FiPhone } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import BookingPopup from "./BookingPopup";
 import { Link } from "react-router-dom";
@@ -11,11 +11,23 @@ const MainHeader = () => {
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const [showBookingPopup, setShowBookingPopup] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const navRef = useRef(null);
+  const lastScrollY = useRef(0);
+
+  const phoneNumber = "+385 99 751 7865";
+  const phoneHref = "tel:+385997517865";
 
   useEffect(() => {
+    // Hide header while scrolling down, reveal it as soon as the user scrolls up
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      const currentY = window.scrollY;
+      setScrolled(currentY > 10);
+
+      if (Math.abs(currentY - lastScrollY.current) > 5) {
+        setHidden(currentY > lastScrollY.current && currentY > 120);
+        lastScrollY.current = currentY;
+      }
     };
 
     const handleClickOutside = (event) => {
@@ -24,7 +36,7 @@ const MainHeader = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
@@ -164,13 +176,28 @@ const MainHeader = () => {
     }),
   };
 
+  const headerHidden = hidden && !mobileMenuOpen && activeSubmenu === null;
+
   return (
+    <>
+    {/* Spacer keeps page content from sliding under the fixed header */}
+    <div className="h-16 md:h-[88px]" aria-hidden="true" />
     <header
-      className={`w-full bg-white relative z-50 transition-all duration-300 font-lato ${
-        scrolled ? "shadow-lg" : "shadow-md"
+      className={`fixed top-0 inset-x-0 w-full z-50 transition-all duration-500 ease-out font-lato ${
+        headerHidden ? "-translate-y-full" : "translate-y-0"
+      } ${
+        scrolled
+          ? "bg-white/90 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.08)] border-b border-secondary/20"
+          : "bg-white shadow-md"
       }`}
       ref={navRef}
     >
+      {/* Brand gradient accent line */}
+      <div
+        className={`absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-[#ff2709] via-[#ff6a0e] to-[#ffaa13] transition-opacity duration-500 ${
+          scrolled ? "opacity-100" : "opacity-0"
+        }`}
+      />
       {/* <motion.div
         className="bg-gradient-to-r from-[#ff2709] via-red-500 to-[#ffaa13] text-white py-2 px-4 text-center text-sm md:text-base"
         initial={{ y: -50 }}
@@ -181,7 +208,11 @@ const MainHeader = () => {
       </motion.div> */}
 
       <div className="container mx-auto px-4">
-        <nav className="flex items-center justify-between py-3 md:py-4">
+        <nav
+          className={`flex items-center justify-between transition-all duration-500 ${
+            scrolled ? "py-2 md:py-3" : "py-3 md:py-4"
+          }`}
+        >
           {/* Logo on the left */}
           <motion.div
             className="flex-shrink-0"
@@ -193,7 +224,9 @@ const MainHeader = () => {
               <img
                 src={logo}
                 alt="Company Logo"
-                className="h-10 md:h-14 transition-all duration-300 hover:scale-105"
+                className={`transition-all duration-500 hover:scale-105 ${
+                  scrolled ? "h-10 md:h-12" : "h-10 md:h-14"
+                }`}
               />
             </Link>
           </motion.div>
@@ -259,8 +292,19 @@ const MainHeader = () => {
             </div>
           </div>
 
-          {/* Book Now button on the right */}
-          <div className="flex items-center">
+          {/* Phone + Book Now on the right */}
+          <div className="flex items-center gap-3 xl:gap-4">
+            <motion.a
+              href={phoneHref}
+              aria-label={`Call us at ${phoneNumber}`}
+              className="group flex items-center gap-2 text-gray-800 hover:text-primary transition-colors duration-300"
+            >
+              <FiPhone className="h-5 w-5 text-primary" />
+              <span className="hidden sm:inline lg:hidden xl:inline text-[15px] font-semibold tracking-wide whitespace-nowrap">
+                {phoneNumber}
+              </span>
+            </motion.a>
+
             <motion.button
               onClick={toggleBookingPopup}
               className="hidden lg:block bg-gradient-to-r from-[#ff2709] to-[#ffaa13] text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
@@ -272,7 +316,7 @@ const MainHeader = () => {
 
             {/* Mobile menu button - right side */}
             <motion.button
-              className="lg:hidden text-gray-800 focus:outline-none ml-4"
+              className="lg:hidden text-gray-800 focus:outline-none ml-1"
               aria-label="Toggle menu"
               onClick={() => {
                 setMobileMenuOpen(!mobileMenuOpen);
@@ -366,6 +410,13 @@ const MainHeader = () => {
                 custom={navItems.length}
                 variants={itemVariants}
               >
+                <a
+                  href={phoneHref}
+                  className="flex items-center justify-center gap-2 w-full mb-3 px-6 py-3 rounded-full border-2 border-primary/30 text-gray-800 font-semibold hover:border-primary hover:text-primary transition-colors duration-300"
+                >
+                  <FiPhone className="h-4 w-4" />
+                  {phoneNumber}
+                </a>
                 <button
                   onClick={() => {
                     toggleBookingPopup();
@@ -386,6 +437,7 @@ const MainHeader = () => {
         {showBookingPopup && <BookingPopup onClose={toggleBookingPopup} />}
       </AnimatePresence>
     </header>
+    </>
   );
 };
 

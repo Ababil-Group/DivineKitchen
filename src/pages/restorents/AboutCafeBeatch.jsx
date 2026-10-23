@@ -145,7 +145,7 @@ const AboutCafeBeatch = () => {
                 variants={item}
               >
                 <FaPhoneAlt className="mr-2 text-amber-600" />
-                <span>+385915508242</span>
+                <span>+385 99 751 7865</span>
               </motion.div>
               <motion.div
                 className="flex items-center text-amber-800"
